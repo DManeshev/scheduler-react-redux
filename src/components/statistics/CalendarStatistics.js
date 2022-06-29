@@ -55,7 +55,9 @@ const CalendarStatistic = () => {
         groups[item.start] = group;
 
         return groups;
-    }, {})    
+    }, {}) 
+    
+    // console.log()
     
     return (
         <div className="statistic__calendar">
@@ -71,7 +73,50 @@ const CalendarStatistic = () => {
             <div className='statistic__calendar-date'>{selectDate}</div>
 
             <ul className='statistic__calendar-list'>
-                <div className='statistic__calendar-list__time'>
+                {Object.entries(groups).map((item, i) => 
+                    <li key={i} className='statistic__calendar-item'>
+                        <div className='statistic__calendar-time'>
+                            {item[0]}
+                        </div>
+                        <div className='statistic__calendar-container'>
+                            {Array.isArray(item[1]) && item[1].length > 0 ?
+                                item[1].map(({ id, date, start, end, secondName, name }) => 
+                                    <div className='statistic__calendar-appointment' key={id}> 
+                                        <div className='statistic__calendar-appointment__time'>
+                                            {start} - {end}
+                                        </div> 
+                                        <FontAwesomeIcon icon={faMinus} className='statistic__calendar-appointment__icon' />
+                                        <div className='statistic__calendar-appointment__info'>
+                                            {secondName} {name}
+                                        </div> 
+                                    </div>
+                                )
+                                :
+                                <hr key={item[0]} className='statistic__calendar-hr'/>
+                            }
+                        </div>
+                    </li>
+                    // {this.headers.map(function (headers) {
+                    //     return (
+                    //       <option key={headers}>{headers}</option>
+                    //     );
+                    //   })}
+                    // Array.isArray(item[1]) && item[1].length > 0 ?
+                    //     item[1].map(({ id, date, start, end, secondName, name }) => 
+                    //         <div className='statistic__calendar-item' key={id}> 
+                    //             <div className='statistic__calendar-item__time'>
+                    //                 {start} - {end}
+                    //             </div> 
+                    //             <FontAwesomeIcon icon={faMinus} className='statistic__calendar-item__icon' />
+                    //             <div className='statistic__calendar-item__info'>
+                    //                 {secondName} {name}
+                    //             </div> 
+                    //         </div>
+                    //     )
+                    //     :
+                    //     <hr key={item[0]} className='statistic__calendar-hr'/>
+                )}
+                {/* <div className='statistic__calendar-list__time'>
                     {Object.keys(groups).map(time => 
                         <div 
                             key={time} 
@@ -97,7 +142,7 @@ const CalendarStatistic = () => {
                             :
                             <hr key={i} className='statistic__calendar-hr'/>
                     )}
-                </div>
+                </div> */}
 
             </ul>
         </div>

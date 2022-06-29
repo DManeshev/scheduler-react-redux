@@ -138,23 +138,21 @@
             width: 400px
             height: 21vh
             overflow-y: auto
-            // display: grid
-            // grid-template-columns: 60px 1fr
-            // grid-template-rows: repeat(9, 1fr)
-            // grid-auto-flow: column
-            // &__container
-            //     height: 100%
-            //     display: flex
-            //     flex-direction: column
-            //     align-items: flex-start
-            //     justify-content: space-around
+        &-item
+            display: flex
+            align-items: flex-start
+            padding-bottom: 15px
+            &:last-child
+                padding-bottom: 0px
         &-time
             font-family: 'Inter', sans-serif
             font-size: 14px
             font-weight: 600
             color: #223c57
             padding-right: 15px
-        &-item
+        &-container
+            width: 100%
+        &-appointment
             display: flex
             align-items: center
             border: 1px solid #f2f6f9
