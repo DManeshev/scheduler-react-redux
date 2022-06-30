@@ -68,7 +68,7 @@ const Appointment = (props) => {
 
             let newIndexEnd = 1 - roundNumber + remainder - 1;
             
-            resizeTimeEnd = timeline[indexCellStart + newIndexEnd].end;
+            resizeTimeEnd = timeline[Math.round(indexCellStart + newIndexEnd)].end;
 
             resizeEl.querySelector('.appointment__time-end').innerHTML = resizeTimeEnd;
         } else if (resizer.classList.contains('appointment__resize--left')) {
