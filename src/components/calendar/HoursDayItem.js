@@ -15,9 +15,6 @@ const HoursDayItem = ({ year, day, month, monthNum, weekday }) => {
         const { start } = time;
 
         if (event.target.classList.contains('hour__day-cell')) {
-            // dispatch(openModal({
-            //     cellDate: `${day}.${monthNum}.${year}.${start}`
-            // }))
             dispatch(openModal())
         }
         
@@ -44,6 +41,16 @@ const HoursDayItem = ({ year, day, month, monthNum, weekday }) => {
 
     let styleTimeline = `repeat(${timeline.length}, 100px)`;
 
+    const findAppointmentForDay = time => {
+        const appointmentForDay = appointments.find(elem => `${day}.${monthNum}.${year}` === elem.date && `${time.start}` === elem.start)
+
+        if (appointmentForDay)
+            return <Appointment {...appointmentForDay} key={appointmentForDay.date} />
+        else 
+            return null
+    }
+    
+
     return (
         <div 
             className="hour__day"
@@ -57,12 +64,7 @@ const HoursDayItem = ({ year, day, month, monthNum, weekday }) => {
                     onDragLeave={e => e.target.classList.remove('hour__day-cell--drop')}
                     onDragOver={e => e.preventDefault()}
                     onDrop={e => dragDropAppointment(e, item)}>
-                    {appointments.map(elem =>
-                        `${day}.${monthNum}.${year}` === elem.date && `${item.start}` === elem.start ? 
-                        <Appointment {...elem} key={elem.date} /> 
-                        : 
-                        null
-                    )}
+                    {findAppointmentForDay(item)}
                 </div>    
             )}           
         </div>

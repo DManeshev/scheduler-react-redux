@@ -8,7 +8,6 @@ import { faCircle, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import './Appointment.sass';
 
 const Appointment = (props) => {
-    
     const timeline = useSelector(store => store.calendarView.timeline);
 
     const dispatch = useDispatch()
