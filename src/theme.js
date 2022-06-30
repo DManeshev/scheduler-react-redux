@@ -36,7 +36,19 @@ const theme = createTheme({
               borderColor: '#F7C91F',
             },
             '& .MuiOutlinedInput-root .MuiInputBase-input': {
-              padding: 8
+              padding: 8,
+            }
+          },
+          '&.calendar__date-input': {
+            '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#F7C91F',
+            },
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#F7C91F',
+            },
+            '& .MuiOutlinedInput-root .MuiInputBase-input': {
+              padding: 8,
+              fontSize: 13
             }
           },
           '&.form__grid-select': {

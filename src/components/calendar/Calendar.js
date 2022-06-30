@@ -1,4 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { setCalendarMonth } from '../../store/calendarSlice';
+
+import ruLocale from 'date-fns/locale/ru';
+import TextField from '@mui/material/TextField';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import Timeline from './Timeline';
 import DayItem from './DayItem';
@@ -9,6 +17,21 @@ import './Calendar.css';
 const Calendar = () => {
 
     const daysArr = useSelector(state => state.calendarView.daysArr);
+
+    const [value, setValue] = useState(new Date());
+
+    const dispatch = useDispatch();
+
+    const handleDate = event => {
+        setValue(event)
+
+        const d = new Date(event)
+        const dMonth = d.getMonth() + 1; 
+        const dYear = d.getFullYear(); 
+        const dDay = d.getDate(); 
+
+        dispatch(setCalendarMonth(`${dYear}-${dMonth}-${dDay}`))
+    }
 
     let pos = { top: 0, left: 0, x: 0, y: 0 };
 
@@ -55,7 +78,20 @@ const Calendar = () => {
         <>
             <div className='calendar'>
                 <div className='left__side'>
-                    {daysArr.map(item =>
+                    {daysArr.map((item, i) =>
+                        i === 0 ? 
+                        <div className='calendar__day' key={i}>
+                            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ruLocale}>
+                                <DatePicker
+                                    sx={{width: '145px'}}
+                                    mask="__.__.____"
+                                    value={value}
+                                    onChange={handleDate}
+                                    renderInput={(params) => <TextField {...params} className='calendar__date-input' />}
+                                />
+                            </LocalizationProvider>
+                        </div>
+                        :
                         <DayItem key={item.day} {...item} />
                     )}
                 </div> 

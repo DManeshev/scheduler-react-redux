@@ -3,7 +3,7 @@ import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 
 const DayItem = ({ year, day, month, monthNum, weekday }) => {
 
-    let currentDay = day == new Date().getDate() && monthNum == new Date().getMonth() + 1 ? `#F7C91F`: null;
+    let currentDay = day == new Date().getDate() && monthNum == new Date().getMonth() + 1 ? `#528efe`: null;
 
     return (
         <div className='calendar__day' style={{color: currentDay}}>

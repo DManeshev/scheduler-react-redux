@@ -6,17 +6,19 @@ import ModalCreate from '../modal/ModalCreate';
 import ModalEdit from '../modal/ModalEdit';
 import Statistics from '../statistics/Statistics';
 
-import './App.css';
+import './App.sass';
 
 function App() { 
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Header />
-        <Routes>
-          <Route path="/" element={<Calendar />} />
-          <Route path="statistics" element={<Statistics />} />
-        </Routes>
+        <div style={{width: '95vw'}}>
+          <Routes>
+            <Route path="/" element={<Calendar />} />
+            <Route path="statistics" element={<Statistics />} />
+          </Routes>
+        </div>
         <ModalCreate />
         <ModalEdit />
       </div>

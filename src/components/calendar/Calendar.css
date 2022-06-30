@@ -1,5 +1,5 @@
 .calendar {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 40px);
     overflow-y: scroll;
     display: flex;
     align-items: flex-start;
@@ -13,6 +13,10 @@
 .calendar::-webkit-scrollbar-thumb {
     background-color: #F7C91F;
     border: 3px solid #F7C91F;
+}
+.calendar__date-input {
+    width: 145px;
+    background: #fff;
 }
 .right__side {
     flex-grow: 1;
@@ -30,17 +34,23 @@
 }
 .timeline {
     display: grid;
-    grid-template-rows: 25px;
+    grid-template-rows: 50px;
+    align-items: center;
 }
 .timeline__item {
+    height: 100%;
+    background: #f7fbfe;
     width: 100px;
     margin-left: -18px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
+    padding-top: 15px;
 }
 .timeline__item:first-child {
-    visibility: hidden;
-    opacity: 0;
+    /* visibility: hidden;
+    opacity: 0; */
+    font-size: 0;
+    /* background: #f7fbfe; */
 }
 .calendar__hours {
     position: relative;
@@ -48,22 +58,20 @@
 .calendar__day {
     height: 50px;
     width: 145px;
-    border: 1px solid #CCCDC6;
-    border-right: none;
+    border: 1px solid #f2f6f9;
     border-bottom: none;
     display: flex;
     align-items: center;
     padding: 0px 5px;
+    /* background: #f7fbfe; */
 }
 .calendar__day:first-child {
-    height: 25px;
     border: none;
-}
-.calendar__day:first-child > .calendar__day-label, .calendar__day:first-child > svg {
-    display: none;
+    padding: 0px;
+    background: #f7fbfe;
 }
 .calendar__day:last-child {
-    border-bottom: 1px solid #CCCDC6;
+    border-bottom: 1px solid #f2f6f9;
 }
 .calendar__day-label {
     display: flex;
@@ -76,6 +84,7 @@
 .calendar__day-icon {
     font-size: 16px;
     padding-right: 10px;
+    color: #528efe;
 }
 .hour__day {
     height: 50px;
@@ -83,18 +92,23 @@
     display: grid;
 }
 .hour__day:last-child .hour__day-cell{
-    border-bottom: 1px solid #CCCDC6;
+    border-bottom: 1px solid #f2f6f9;
 }
 .hour__day-cell {
     position: relative;
-    border-top: 1px solid #CCCDC6;
-    background: #f4f4f4;
+    border-top: 1px solid #f2f6f9;
+    cursor: pointer;
+}
+.hour__day-cell:hover {
+    background: #f2f6f9;
 }
 .hour__day-cell--drop {
     background: #CCCDC6;
 }
 
-
+.calendar__footer {
+    background: #f7fbfe;
+}
 .calendar__footer-list {
     height: 36px;
     display: flex;

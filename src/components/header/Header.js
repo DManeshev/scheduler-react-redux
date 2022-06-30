@@ -1,50 +1,37 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCalendarMonth } from '../../store/calendarSlice';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';   
 
-import ruLocale from 'date-fns/locale/ru';
-import TextField from '@mui/material/TextField';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';    
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faHouse, faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-import './Header.css'
+import './Header.sass'
 
 const Header = () => {
-    const [value, setValue] = useState(new Date());
-
-    const dispatch = useDispatch();
-
-    const handleDate = event => {
-        setValue(event)
-
-        const d = new Date(event)
-        const dMonth = d.getMonth() + 1; 
-        const dYear = d.getFullYear(); 
-        const dDay = d.getDate(); 
-
-        dispatch(setCalendarMonth(`${dYear}-${dMonth}-${dDay}`))
-    }
-
     return (
-        <header className="header wrapper">
-            <div className="header__container">
-                <div className="header__list">
-                    <Link to='/' className="header__logo">Расписание</Link>
-                    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ruLocale}>
-                        <DatePicker
-                            views={['month', 'year']}
-                            value={value}
-                            onChange={handleDate}
-                            renderInput={(params) => <TextField {...params} className='date__input' />}
-                        />
-                    </LocalizationProvider>
-                </div>
+        // <header className="header wrapper">
+        //     <div className="header__container">
+        //         <div className="header__list">
+        //             <Link to='/' className="header__logo">Расписание</Link>
+        //         </div>
 
-                <Link to='statistics' className='header__link'>Статистика</Link>
+        //         <Link to='statistics' className='header__link'>Статистика</Link>
+        //     </div>
+        // </header>
+        <nav className='nav' style={{width: '5vw'}}>
+            <div className='nav__container'>
+                <Link to='/' className='nav__link'>
+                    <FontAwesomeIcon icon={faHouse} />
+                </Link>
+
+                <Link to='statistics' className='nav__link'>
+                    <FontAwesomeIcon icon={faClipboardList} />
+                </Link>
             </div>
-        </header>
+
+            <a href="https://github.com/DManeshev/scheduler-react-redux" target="_blank" className='nav__link'>
+                <FontAwesomeIcon icon={faGithub} />
+            </a>
+        </nav>
     )
 }
 

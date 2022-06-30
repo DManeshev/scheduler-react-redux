@@ -1,5 +1,4 @@
 import AppointmentStatistics from "./AppointmentStatistics";
-import DataAppointment from "./DataAppointment";
 import CalendarStatistic from "./CalendarStatistics";
 
 import './Statistics.sass';
@@ -9,7 +8,6 @@ const Statistics = () => {
         <main className="main">
             <div className="statistic">
                 <AppointmentStatistics />
-                {/* <DataAppointment /> */}
                 <CalendarStatistic />
             </div>
         </main>
