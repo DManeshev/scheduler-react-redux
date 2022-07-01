@@ -67,6 +67,13 @@ const ModalCreate = () => {
     const handleEndTime = (event) => setEndAppointment(event.target.value);
     const handleColor = (event) => setColor(event.target.value)
 
+    useEffect(() => {
+        setDate(new Date(clicked.date))
+        setStartAppointment(clicked.start)
+        setEndAppointment(clicked.end)
+        
+    }, [clicked])
+
     function close() {
         dispatch(closeModal())
 
@@ -142,18 +149,21 @@ const ModalCreate = () => {
                                 mask="__.__.____"
                                 value={date}
                                 onChange={(newValue) => setDate(newValue)}
-                                renderInput={(params) => <TextField {...params} className="date__input" />}
+                                renderInput={(params) => <TextField {...params} className="date__input" required />}
                             />
                         </LocalizationProvider> 
                         <FormControl sx={{ minWidth: 120 }} size="small" className="form__grid-select">
-                            <InputLabel id="addStartAppointment" className="form__grid-input">Начало приема</InputLabel>
+                            <InputLabel id="addStartAppointment" className="form__grid-input">
+                                Начало приема
+                            </InputLabel>
                             <Select
                                 MenuProps={{ classes: { list: 'form__grid-select--height' }}}
                                 labelId="addStartAppointment"
                                 id="addStartAppointment"
-                                value={startAppointment}
+                                value={startAppointment ?? ''}
                                 label="Начало приема"
-                                onChange={handleStartTime} >
+                                onChange={handleStartTime} 
+                                required>
                                 {timeline.map(({ start }) => 
                                     <MenuItem key={start} value={start} size="small">{start}</MenuItem>  
                                 )}
@@ -166,9 +176,10 @@ const ModalCreate = () => {
                                 className="form__grid-input"
                                 labelId="addEndAppointment"
                                 id="addEnd"
-                                value={endAppointment}
+                                value={endAppointment ?? ''}
                                 label="Конец приема"
-                                onChange={handleEndTime} >
+                                onChange={handleEndTime} 
+                                required>
                                 {timeline.map(({ end }) => 
                                     <MenuItem key={end} value={end}>{end}</MenuItem>
                                 )}
@@ -182,7 +193,8 @@ const ModalCreate = () => {
                             variant="outlined"
                             size="small"
                             name='addSecondName'
-                            onChange={e => setSecondName(e.target.value)} />
+                            onChange={e => setSecondName(e.target.value)}
+                            required />
                         <TextField 
                             className="form__grid-input"
                             value={name}
@@ -191,7 +203,8 @@ const ModalCreate = () => {
                             variant="outlined" 
                             size="small"
                             name='addName'
-                            onChange={e => setName(e.target.value)} />
+                            onChange={e => setName(e.target.value)}
+                            required />
                         <TextField 
                             className="form__grid-input form__grid--row"
                             fullWidth 
@@ -203,7 +216,7 @@ const ModalCreate = () => {
                             name='addCommentary'
                             onChange={e => setComment(e.target.value)} />
                     </div>
-                    <ColorPicker handleColor={handleColor} color='#2185D0' />
+                    <ColorPicker handleColor={handleColor} color='#2185d066' />
                     <ButtonCreate type="submit" variant="outline">Создать запись</ButtonCreate>
                 </form>
             </Box>

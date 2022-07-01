@@ -168,7 +168,7 @@ const ModalEdit = () => {
                                 value={date}
                                 name='addDate'
                                 onChange={(newValue) => setDate(newValue)}
-                                renderInput={(params) => <TextField {...params} className="date__input" />}
+                                renderInput={(params) => <TextField {...params} className="date__input" required />}
                             />
                         </LocalizationProvider> 
                         <FormControl sx={{ minWidth: 120 }} size="small" className="form__grid-select">
@@ -179,7 +179,8 @@ const ModalEdit = () => {
                                 id="addStartAppointment"
                                 value={startAppointment ?? ''}
                                 label="Начало приема"
-                                onChange={handleStartTime} >
+                                onChange={handleStartTime}
+                                required >
                                 {timeline.map(({ start }) => 
                                     <MenuItem key={start} value={start} size="small">{start}</MenuItem>  
                                 )}
@@ -194,7 +195,8 @@ const ModalEdit = () => {
                                 id="addEnd"
                                 value={endAppointment ?? ''}
                                 label="Конец приема"
-                                onChange={handleEndTime} >
+                                onChange={handleEndTime} 
+                                required >
                                 {timeline.map(({ end }) => 
                                     <MenuItem key={end} value={end}>{end}</MenuItem>
                                 )}
@@ -208,7 +210,8 @@ const ModalEdit = () => {
                             variant="outlined"
                             size="small"
                             name='addSecondName'
-                            onChange={e => setSecondName(e.target.value)} />
+                            onChange={e => setSecondName(e.target.value)}
+                            required />
                         <TextField 
                             className="form__grid-input"
                             value={name ?? ''}
@@ -217,7 +220,8 @@ const ModalEdit = () => {
                             variant="outlined" 
                             size="small"
                             name='addName'
-                            onChange={e => setName(e.target.value)} />
+                            onChange={e => setName(e.target.value)}
+                            required />
                         <TextField 
                             className="form__grid-input form__grid--row"
                             fullWidth 

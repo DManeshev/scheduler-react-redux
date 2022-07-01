@@ -1,16 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const appointmentSlice = createSlice({
     name: 'appointment ',
     initialState: {
         show: false,
         showEditModal: false,
+        clicked: {},
         appointments: [
-            {id: uuidv4(), date: "04.06.2022", start: "09:00", end: "10:00", name: "Геннадий", secondName: "Иванов", color: "#b5cc1866", comment: "комментарий", stage: 'atWork'},
-            {id: uuidv4(), date: "02.06.2022", start: "10:00", end: "10:45", name: "Александр", secondName: "Петров", color: "#db282866", comment: "комментарий", stage: 'closed'},
-            {id: uuidv4(), date: "03.06.2022", start: "11:00", end: "11:15", name: "Сергей", secondName: "Сидоров", color: "#2185D066", comment: "комментарий", stage: 'new'},
-            // {id: uuidv4(), date: "05.06.2022", start: "11:00", end: "13:15", name: "asdfasdf", secondName: "asdf", color: "#2185d066", comment: "комментарий", stage: 'atWork'}
+            {id: uuidv4(), date: "04.07.2022", start: "09:00", end: "10:00", name: "Геннадий", secondName: "Иванов", color: "#b5cc1866", comment: "комментарий", stage: 'atWork'},
+            {id: uuidv4(), date: "02.07.2022", start: "10:00", end: "10:45", name: "Александр", secondName: "Петров", color: "#db282866", comment: "комментарий", stage: 'closed'},
+            {id: uuidv4(), date: "03.07.2022", start: "11:00", end: "11:15", name: "Сергей", secondName: "Сидоров", color: "#2185D066", comment: "комментарий", stage: 'new'},
         ], 
         appointment: {},
         draggableAppointment: {},
@@ -19,6 +19,10 @@ const appointmentSlice = createSlice({
     reducers: {
         openModal(state, action) {
             state.show = true;
+            
+            const { date, start, end } = action.payload;
+
+            state.clicked = { date, start, end }
         },
         openModalEdit(state, action) {
             state.showEditModal = true;

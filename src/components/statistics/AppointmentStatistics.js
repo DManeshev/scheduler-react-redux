@@ -16,7 +16,8 @@ const AppointmentStatistics = () => {
     const { monthNames } = useSelector(state => state.calendarView);
     
     const [ stage, setStage ] = useState('');
-    const [ appointmentArr, setAppointmentArr ] = useState([])
+    const [ appointmentArr, setAppointmentArr ] = useState([]);
+    const [ dateModal, setDateModal ] = useState(new Date());
 
     const dispatch = useDispatch();
 
@@ -78,7 +79,7 @@ const AppointmentStatistics = () => {
             )
         } else {
             return (
-                <li className="statistics__view-list__message">
+                <li className="statistic__view-list__message">
                     <span>Нет записей по выбранному фильтру</span>
                 </li>
             )
@@ -86,12 +87,25 @@ const AppointmentStatistics = () => {
     }
 
     const view = AppointmentStatisticsView();
+ 
+
+    const createAppointmentFromStat = () => {
+
+        const initialTimeStart = '09:00';
+        const initialTimeEnd = '09:15';
+
+        dispatch(openModal({
+            date: `${dateModal.getFullYear()}-${dateModal.getMonth() + 1}-${dateModal.getDate()}`,
+            start: initialTimeStart, 
+            end: initialTimeEnd
+        }))
+    }
 
     return (
         <div className="statistic__view">
             <div className="statistic__view-header">
                 <h2 className="statistic__logo">Список записей</h2>
-                <button className="statistic__view-btn" onClick={e => dispatch(openModal())}>
+                <button className="statistic__view-btn" onClick={createAppointmentFromStat}>
                     <FontAwesomeIcon icon={faPlus} />
                     Новая запись
                 </button>

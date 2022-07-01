@@ -12,10 +12,14 @@ const HoursDayItem = ({ year, day, month, monthNum, weekday }) => {
     const dispatch = useDispatch();
 
     const handelModal = (event, time) => {
-        const { start } = time;
+        const { start, end } = time;
 
         if (event.target.classList.contains('hour__day-cell')) {
-            dispatch(openModal())
+            dispatch(openModal({
+                date: `${year}-${monthNum}-${day}`,
+                start, 
+                end
+            }))
         }
         
     }
